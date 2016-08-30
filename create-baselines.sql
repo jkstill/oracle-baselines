@@ -8,7 +8,7 @@ exec :n_expire_days := 1
 
 declare
 
-	v_baseline_pfx varchar2(30) := 'dw-tuning';
+	v_baseline_pfx varchar2(30) := 'dw';
 	v_baseline_name varchar2(128);
 
 	i_expire_days integer := :n_expire_days;
@@ -34,15 +34,15 @@ begin
 dbms_output.put_line(lpad('=',30,'='));
 
 for aasrec in (
-	@@top10aas
-	select  begin_time, instance_number, begin_snap_id, end_snap_id, aas, dbid
+	@@top10
+	select  begin_time, instance_number, begin_snap_id, end_snap_id, value, dbid
 	from top10
 )
 loop
 	pl('   begin_time: ' || aasrec.begin_time);
 	pl('begin snap_id: ' || aasrec.begin_snap_id);
 	pl('  end snap_id: ' || aasrec.end_snap_id);
-	pl('          AAS: ' || aasrec.aas);
+	pl(' Metric Value: ' || aasrec.value);
 
 
 	-- create the baselines
@@ -54,6 +54,7 @@ loop
 			|| to_char(aasrec.begin_time,'yyyymmdd-hh24:mi:ss');
 
 		pl('Baseline Name: ' || v_baseline_name);
+		--/*
 		dbms_workload_repository.create_baseline(
 			start_snap_id => aasrec.begin_snap_id,
 			end_snap_id => aasrec.end_snap_id,
@@ -61,6 +62,7 @@ loop
 			dbid => aasrec.dbid, 
 			expiration => i_expire_days
 		);
+		--*/
 
 	exception
 	when e_baseline_exists then
