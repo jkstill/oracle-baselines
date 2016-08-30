@@ -35,6 +35,10 @@ The call to top10aas.sql could be replaced with any similar SQL fragment that fi
 
 Displays entries in DBA_HIST_BASELINE
 
+<h4>aas-[123].sql</h4>
+
+Examples of different methods that may be used to determine the top 10 AWR snapshots to examine.
+
 <h3>Test Run</h3>
 
 As shown these baselines were all created during a previous execution of the script
