@@ -32,9 +32,9 @@ with aas as (
 ),
 top10aas as (
    select
-      sn.begin_interval_time begin_time
+      to_char(trunc(sn.begin_interval_time,'hh'), 'yyyy-mm-dd hh24:mi') begin_time
       , aas.instance_number
-      , aas.snap_id
+      , aas.snap_id begin_snap_id
       , aas.value
       , aas.dbid
    from aas
