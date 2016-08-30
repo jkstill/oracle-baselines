@@ -17,7 +17,7 @@ The same idea could be used to find top PGA usage, CPU, IO, etc.
 
 <h3>Files</h3>
 
-<h4>top10aas.sql</h4>
+<h4>top10.sql</h4>
 
 This is a script fragment that is called from create-baselines.sql.
 
