@@ -19,21 +19,31 @@ The same idea could be used to find top PGA usage, CPU, IO, etc.
 
 <h4>top10.sql</h4>
 
-This is a script fragment that is called from create-baselines.sql.
+This is a script fragment that is called from create-awr-baselines.sql.
 
 Its purpose is to find the top 10 AWR Snapshots in terms of maximum AAS (Average Active Sessions)
 
-<h4>create-baselines.sql</h4>
+<h4>create-awr-baselines.sql</h4>
 
 This script creates AWR baselines based on the findings from top10aas.sql.
+
+The baselines will be named with a prefix of <i>AWR-Top10</i>
 
 The retention period is set by the sqlplus variable :n_expire_days, and is currently set to 1 day
 
 The call to top10aas.sql could be replaced with any similar SQL fragment that finds the top N snap_id's based on PGA usage, IO, etc.
 
+This script will also genereate the SQL script <i>top10-awrrpt.sql</i> which can be used to generate an AWR report for each of the baselines.
+
+These AWR reports are instance specific, so on a RAC system the report will be generated for the specific instance where the top db activity was found.
+
 <h4>show-awr-baselines.sql</h4>
 
 Displays entries in DBA_HIST_BASELINE
+
+<h4>drop-awr-baseline.sql</h4>
+
+This script drops all baselines named with a prefix of  <i>AWR-Top10</i>
 
 <h4>aas-[123].sql</h4>
 
@@ -43,7 +53,7 @@ Examples of different methods that may be used to determine the top 10 AWR snaps
 
 As shown these baselines were all created during a previous execution of the script
 
-SQL> @create-baselines
+SQL> @create-awr-baselines
 
 ==============================
 begin_time: 21-JUL-16 10.00.48.352 PM
@@ -116,7 +126,6 @@ AAS: 3.83920206563385
 Baseline Name: dw-tuning_4606_20160725-21:00:28
 !!Baseline dw-tuning_4606_20160725-21:00:28 already exists
 ==============================
-
 
 
 
