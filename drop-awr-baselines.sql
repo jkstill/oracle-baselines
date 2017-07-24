@@ -3,6 +3,13 @@
 -- drop all baselines named AWR-Top10
 
 
+prompt 
+prompt '=== Current Baselines ==='
+prompt
+@@show-awr-baselines
+
+prompt
+
 prompt
 prompt !!!! This script will drop all AWR Top 10 Baselines !!!!
 prompt
@@ -36,8 +43,6 @@ end;
 /
 
 whenever sqlerror continue
-
-@@show-awr-baselines
 
 begin
 	for brec in (
