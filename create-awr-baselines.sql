@@ -88,7 +88,7 @@ loop
 	begin
 		v_baseline_name := v_baseline_pfx || '_'
 			|| to_char(aasrec.begin_snap_id) || '_'
-			|| to_char(aasrec.begin_time,'yyyymmdd-hh24:mi:ss');
+			|| to_char(aasrec.begin_time,'yyyymmdd-hh24mi'); --  bug requires max name of 30 bytes
 
 		pl('-- Baseline Name: ' || v_baseline_name);
 		--/*
