@@ -8,7 +8,7 @@ exec :n_expire_days := 1
 
 declare
 
-	v_baseline_pfx varchar2(30) := 'dw'; -- tag as Data Warehouse
+	v_baseline_pfx varchar2(30) := 'AWR-Top10'; -- used for reporting
 	v_baseline_name varchar2(128);
 
 	i_expire_days integer := :n_expire_days;
