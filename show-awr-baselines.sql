@@ -12,6 +12,7 @@ col end_snap_id format 99999999 head 'END|SNAP ID'
 col start_snap_time format a20
 col end_snap_time format a20
 col expiration format a20
+col creation_time format a20
 
 select
 	--dbid
