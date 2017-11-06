@@ -23,16 +23,20 @@ with aas as (
 					h.wait_class is null  -- on CPU
 					or h.wait_class != 'Idle' -- wait events - ignore idle events
 				)
+				--
 				-- these predicates are useful if you have some idea of the date range
 				--
 				-- most recent 5 days
-				-- and s.end_interval_time > systimestamp - 5 
+				-- and s.end_interval_time > to_timestamp(trunc(systimestamp) - 5)
 				--
 				-- or maybe a range
 				-- and s.end_interval_time between timestamp '2016-08-01 00:00:01' and timestamp '2016-08-02 23:59:59'
 		)
 		order by value desc
 	)
+	-- if the very last snap_id were chosen as the begining of a report 
+	-- there would be no ending snap_id, which would result in an error when calling the report or creating the baseline
+	where end_snap_id is not null
 ),
 top10 as (
 	select
