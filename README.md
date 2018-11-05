@@ -1,7 +1,5 @@
 
-<pre>
-
-<h3>Top 10 AWR Baselines</h3>
+# Top 10 AWR Baselines
 
 Here's a method to find the periods of top activity in AWR and create a baseline for the top 10 periods.
 
@@ -15,43 +13,45 @@ This code looks for the top 10 AAS (Average Active Sessions) periods and creates
 
 The same idea could be used to find top PGA usage, CPU, IO, etc.
 
-<h3>Files</h3>
+## Files
 
-<h4>top10.sql</h4>
+### top10.sql
 
 This is a script fragment that is called from create-awr-baselines.sql.
 
 Its purpose is to find the top 10 AWR Snapshots in terms of maximum AAS (Average Active Sessions)
 
-<h4>create-awr-baselines.sql</h4>
+### create-awr-baselines.sql
 
 This script creates AWR baselines based on the findings from top10aas.sql.
 
-The baselines will be named with a prefix of <i>AWR-Top10</i>
+The baselines will be named with a prefix of _AWR-Top10_
 
-The retention period is set by the sqlplus variable :n_expire_days, and is currently set to 1 day
+The retention period is set by the sqlplus variable _:n_expire_days_, and is currently set to 1 day
 
 The call to top10aas.sql could be replaced with any similar SQL fragment that finds the top N snap_id's based on PGA usage, IO, etc.
 
-This script will also genereate the SQL script <i>top10-awrrpt.sql</i> which can be used to generate an AWR report for each of the baselines.
+This script will also genereate the SQL script _top10-awrrpt.sql_ which can be used to generate an AWR report for each of the baselines.
 
 These AWR reports are instance specific, so on a RAC system the report will be generated for the specific instance where the top db activity was found.
 
-<h4>show-awr-baselines.sql</h4>
+### show-awr-baselines.sql
 
 Displays entries in DBA_HIST_BASELINE
 
-<h4>drop-awr-baseline.sql</h4>
+### drop-awr-baseline.sql
 
-This script drops all baselines named with a prefix of  <i>AWR-Top10</i>
+This script drops all baselines named with a prefix of  _AWR-Top10_
 
-<h4>aas-[123].sql</h4>
+### aas-[123].sql
 
 Examples of different methods that may be used to determine the top 10 AWR snapshots to examine.
 
-<h3>Test Run</h3>
+## Test Run
 
 As shown these baselines were all created during a previous execution of the script
+
+```sql
 
 SQL> @create-awr-baselines
 
@@ -126,7 +126,6 @@ AAS: 3.83920206563385
 Baseline Name: dw-tuning_4606_20160725-21:00:28
 !!Baseline dw-tuning_4606_20160725-21:00:28 already exists
 ==============================
+```
 
 
-
-</pre>
