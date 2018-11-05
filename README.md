@@ -37,9 +37,17 @@ The baselines will be named with a prefix of _AWR-Top10_
 
 The call to top10aas.sql could be replaced with any similar SQL fragment that finds the top N snap_id's based on PGA usage, IO, etc.
 
-This script will also genereate the SQL script _top10-awrrpt.sql_ which can be used to generate an AWR report for each of the baselines.
+This script will also generate the SQL script _top10-awrrpt.sql_ which can be used to generate an AWR report for each of the baselines.
 
 These AWR reports are instance specific, so on a RAC system the report will be generated for the specific instance where the top db activity was found.
+
+As DBA_HIST_BASELINE does not store an instance number, the instance number for each baseline as well as the metric value (used to determine Top 10) are both encoded into the Baseline name
+
+For instance, the following report is for instance 2, and a Metric of 77.2 AAS was used to determine its place in the top 10 AWR periods.
+
+AWR-Top10_3662_2_77.2_20181104-0100
+               ^ instance
+                 ^^^^ metric
 
 ### gen-awr-reports.sql
 
