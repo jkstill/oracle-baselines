@@ -45,9 +45,11 @@ As DBA_HIST_BASELINE does not store an instance number, the instance number for 
 
 For instance, the following report is for instance 2, and a Metric of 77.2 AAS was used to determine its place in the top 10 AWR periods.
 
+```
 AWR-Top10_3662_2_77.2_20181104-0100
                ^ instance
                  ^^^^ metric
+```
 
 ### gen-awr-reports.sql
 
