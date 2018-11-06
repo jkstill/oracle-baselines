@@ -72,7 +72,7 @@ Displays the _AWR-Top10_ entries in DBA_HIST_BASELINE
 
 This script drops all baselines named with a prefix of  _AWR-Top10_
 
-### aas-[123].sql
+### aas-[1234].sql
 
 Examples of different methods that may be used to determine the top 10 AWR snapshots to examine.
 
