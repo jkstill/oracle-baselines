@@ -21,8 +21,8 @@ with data as (
 aas as (
 	select
 		m.dbid
-		, lag(m.snap_id,1) over (partition by m.instance_number order by m.snap_id) begin_snap_id
-		, m.snap_id end_snap_id
+		, m.snap_id begin_snap_id
+		, m.snap_id + 1 end_snap_id -- obviously this can fail if it is the most recent snapshot
 		, s.begin_interval_time
 		, m.instance_number
 		, m.value - lag(m.value,1) over (partition by m.instance_number order by m.snap_id) value
@@ -48,5 +48,3 @@ top10 as (
 )
 select * from top10
 /
-
-
