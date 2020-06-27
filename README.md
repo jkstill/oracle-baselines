@@ -84,6 +84,17 @@ An example of the setup used for non-interactive AWR report generation.
 
 An example of the setup used for non-interactive RAC AWR report generation.
 
+## awr-top10.sh
+
+This script will attempt login to all databases found in /etc/oratab, generate baselines and create text and html reports.
+
+The script will detect which of up to 4 RAC nodes it may be on and adjust ORACLE_SID accordingly.
+
+It will also work for standalone non-RAC databases.
+
+All the report files will be oranized into directories named per database, and put in a zip file.
+
+
 ## Test Run
 
 ### Create the baselines
