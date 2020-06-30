@@ -11,9 +11,15 @@ set serveroutput on size unlimited
 
 @@config
 
+-- set view_loc as '', AWR_ROOT or AWR_PDB
+@@set-view-loc
+
+var view_loc varchar2(10);
+
+exec :view_loc := '&view_loc'
+
 set pause off echo off term on pagesize 0 linesize 200 trimspool on 
 set feed off timing off
-
 
 spool top10-awrrpt.sql
 
@@ -113,6 +119,7 @@ loop
 	pl('define  begin_snap   = ' || to_char(aasrec.begin_snap_id));
 	pl('define  end_snap     = ' || to_char(aasrec.end_snap_id));
 	pl('define  report_type  = ' || :v_report_type);
+	pl('define  view_loc     = ' || :view_loc);
 
 	--pl('define  report_name  =  awr-reports/AWR-Top10_' || to_char(aasrec.instance_number) || '_' || to_char(aasrec.begin_snap_id) || '_'  || to_char(aasrec.end_snap_id) || '.html');
 	pl('define  report_name  =  awr-reports/' || v_report_name);
