@@ -9,6 +9,7 @@
 --   sum the counts across instances
 -- 
 -- there should be code added to exclude con_id if on legacy database
+--
 
 /*
 -- used for independent testing
@@ -29,7 +30,7 @@ with aas as (
    select
 		trunc(begin_time,'MI') begin_time
 		, avg(value) value
-   from aas_test_data
+   from dba_hist_sysmetric_history
    where metric_name = 'Average Active Sessions'
    group by trunc(begin_time,'MI')
 		, instance_number
