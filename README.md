@@ -13,6 +13,14 @@ This code looks for the top 10 AAS (Average Active Sessions) periods and creates
 
 The same idea could be used to find top PGA usage, CPU, IO, etc.
 
+There are two scripts here for finding the top 10 busiest AWR snapshot periods.
+
+Sometimes one will work a little better than the other.
+
+Use which ever one returns the highest AAS values.
+
+Then, copy that script to `top10.sql`
+
 ## Files
 
 ### config.sql
@@ -23,9 +31,17 @@ The AWR Baseline retention period is set by the sqlplus variable _:n_expire_days
 
 Set the AWR report type to either Text or HTML by changing the value of _:v_report_type_ to 'text' or 'html'
 
+## top10-AWR.sql
+
+Uses the average AAS (Average Active Sessions) value over a snapshot period.
+
+## top10-derived.sql
+
+The average AAS is derived from the data in dba_hist_active_sess_history
+
 ### top10.sql
 
-This is a script fragment that is called from create-awr-baselines.sql.
+This is copied from either `top10-AWR.sql` or `top10-derived.sql`.
 
 Its purpose is to find the top 10 AWR Snapshots in terms of maximum AAS (Average Active Sessions)
 

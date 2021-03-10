@@ -11,9 +11,15 @@ set serveroutput on size unlimited
 
 @@config
 
+-- set view_loc as '', AWR_ROOT or AWR_PDB
+@@set-view-loc
+
+var view_loc varchar2(10);
+
+exec :view_loc := '&view_loc'
+
 set pause off echo off term on pagesize 0 linesize 200 trimspool on 
 set feed off timing off
-
 
 spool top10-awrrpt.sql
 
@@ -24,7 +30,7 @@ declare
 	v_instance_name varchar2(30);
 	v_db_name varchar2(30);
 
-	v_report_pfx varchar2(30) := 'AWR-Top10'; -- used for reporting
+	v_report_pfx varchar2(30) := 'T10'; -- used for reporting
 	v_report_name varchar2(128);
 
 	i_expire_days integer := :n_expire_days;
@@ -79,7 +85,7 @@ select
 		instr(baseline_name,'_',1,4) - instr(baseline_name,'_',1,3) -1 -- length
 	) metric
 from dba_hist_baseline
-where baseline_name like 'AWR-Top10%'
+where baseline_name like 'T10%'
 order by creation_time
 )
 loop
@@ -113,8 +119,9 @@ loop
 	pl('define  begin_snap   = ' || to_char(aasrec.begin_snap_id));
 	pl('define  end_snap     = ' || to_char(aasrec.end_snap_id));
 	pl('define  report_type  = ' || :v_report_type);
+	pl('define  view_loc     = ' || :view_loc);
 
-	--pl('define  report_name  =  awr-reports/AWR-Top10_' || to_char(aasrec.instance_number) || '_' || to_char(aasrec.begin_snap_id) || '_'  || to_char(aasrec.end_snap_id) || '.html');
+	--pl('define  report_name  =  awr-reports/T10_' || to_char(aasrec.instance_number) || '_' || to_char(aasrec.begin_snap_id) || '_'  || to_char(aasrec.end_snap_id) || '.html');
 	pl('define  report_name  =  awr-reports/' || v_report_name);
 
 	pl('@?/rdbms/admin/awrrpti');

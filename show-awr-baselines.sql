@@ -42,6 +42,6 @@ select
 	--, last_time_computed
 	--, con_id
 from dba_hist_baseline
-where baseline_name like 'AWR-Top10%'
+where baseline_name like 'T10%'
 order by creation_time
 /

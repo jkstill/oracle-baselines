@@ -1,6 +1,6 @@
 
 -- drop-awr-baselines.sql
--- drop all baselines named AWR-Top10
+-- drop all baselines named T10
 
 
 prompt 
@@ -48,7 +48,7 @@ begin
 	for brec in (
 		select baseline_name
 		from dba_hist_baseline
-		where baseline_name like 'AWR-Top10_%'
+		where baseline_name like 'T10_%'
 	)
 	loop
 		dbms_workload_repository.drop_baseline(baseline_name => brec.baseline_name, cascade => FALSE );
