@@ -14,7 +14,7 @@ declare
 	v_instance_name varchar2(30);
 	v_db_name varchar2(30);
 
-	v_baseline_pfx varchar2(30) := 'AWR-Top10'; -- used for reporting
+	v_baseline_pfx varchar2(30) := 'T10'; -- used for reporting
 	v_baseline_name varchar2(128);
 
 	i_expire_days integer := :n_expire_days;

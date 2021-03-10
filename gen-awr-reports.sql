@@ -30,7 +30,7 @@ declare
 	v_instance_name varchar2(30);
 	v_db_name varchar2(30);
 
-	v_report_pfx varchar2(30) := 'AWR-Top10'; -- used for reporting
+	v_report_pfx varchar2(30) := 'T10'; -- used for reporting
 	v_report_name varchar2(128);
 
 	i_expire_days integer := :n_expire_days;
@@ -85,7 +85,7 @@ select
 		instr(baseline_name,'_',1,4) - instr(baseline_name,'_',1,3) -1 -- length
 	) metric
 from dba_hist_baseline
-where baseline_name like 'AWR-Top10%'
+where baseline_name like 'T10%'
 order by creation_time
 )
 loop
@@ -121,7 +121,7 @@ loop
 	pl('define  report_type  = ' || :v_report_type);
 	pl('define  view_loc     = ' || :view_loc);
 
-	--pl('define  report_name  =  awr-reports/AWR-Top10_' || to_char(aasrec.instance_number) || '_' || to_char(aasrec.begin_snap_id) || '_'  || to_char(aasrec.end_snap_id) || '.html');
+	--pl('define  report_name  =  awr-reports/T10_' || to_char(aasrec.instance_number) || '_' || to_char(aasrec.begin_snap_id) || '_'  || to_char(aasrec.end_snap_id) || '.html');
 	pl('define  report_name  =  awr-reports/' || v_report_name);
 
 	pl('@?/rdbms/admin/awrrpti');
